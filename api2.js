@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var express = require('express');
 var app = express();
@@ -14,7 +14,7 @@ mongo.connect('mongodb://localhost:27017/shorturls', function (err, db) {
 
     var reRoutes = db.collection('routes');
 
-    app.get(/^\/([^\\]+?)(?:\/(?=$))?$/, function(request, response){
+    app.get(/^\/([^\\]+?)(?:\/(?=$))?$/, function (request, response) {
 
         var givenRoute = request.params[0];
 
@@ -62,7 +62,7 @@ mongo.connect('mongodb://localhost:27017/shorturls', function (err, db) {
                 } else {
                     console.log(data);
                     var count = data;
-                    reRoutes.insert({"originalurl" : givenRoute, "shorturl" : count}, function(err, data){
+                    reRoutes.insert({"originalurl" : givenRoute, "shorturl" : count}, function(err, data) {
                         if (err) {
                             throw new Error('makeNewRoute insert failed');
                         } else {
@@ -76,7 +76,7 @@ mongo.connect('mongodb://localhost:27017/shorturls', function (err, db) {
 
     });
 
-    app.listen(8080, function(){
+    app.listen(8080, function() {
         console.log("Listening on port 8080!");
     });
 

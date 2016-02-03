@@ -12,11 +12,11 @@ app.get('/', function(request, response){
     resObj.language = request.get("Accept-Language").slice(0,5);
     var regEx = new RegExp(/\(.+?\)/);
     var userSoftware = regEx.exec(request.get("User-Agent"))[0];
-    resObj.software = userSoftware.slice(1, userSoftware.length - 1)
+    resObj.software = userSoftware.slice(1, userSoftware.length - 1);
 
     response.send(resObj);
 });
 
 app.listen(8080, function(){
     console.log("Listening on port 8080");
-})
+});

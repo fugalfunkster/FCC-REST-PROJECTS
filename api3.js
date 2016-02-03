@@ -36,7 +36,7 @@ mongo.connect('mongodb://localhost:27017/imagesearch', function (err, db) {
     app.get('/search/:query', function(req, res){
 
         if(req.params.query === "favicon.ico"){
-            return
+            return;
         }
 
         var query = req.params.query;
@@ -62,7 +62,7 @@ mongo.connect('mongodb://localhost:27017/imagesearch', function (err, db) {
               var json = JSON.parse(body);
               var items  = [];
               json.items.forEach(function(each){
-                  items.push({"title": each.title, "snippet": each.snippet, "url" :each.link, "context": each.image.contextLink})
+                  items.push({"title": each.title, "snippet": each.snippet, "url" :each.link, "context": each.image.contextLink});
               });
               res.send(items);
           }

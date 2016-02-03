@@ -1,0 +1,23 @@
+{
+  "name": "fcc_apis",
+  "version": "1.0.0",
+  "description": "I wrote these REST APIs as part of the FreeCodeCamp cirriculum. Originally, these APIs each had their own workspace on Cloud9, and their own git repo, but that seemed unnecessary, so I refactored them into a single workspace and provided extensive comments to help me remember what I learned – while these projects are still fresh in my mind.",
+  "main": "api0.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fugalfunkster/FCC-REST-PROJECTS.git"
+  },
+  "author": "Matthew Hoselton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fugalfunkster/FCC-REST-PROJECTS/issues"
+  },
+  "homepage": "https://github.com/fugalfunkster/FCC-REST-PROJECTS#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}

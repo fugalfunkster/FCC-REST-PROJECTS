@@ -3,7 +3,7 @@ var app = express();
 
 var port = process.env.PORT || 8080;
 
-var router = require('./routes/APIrouter');
+var router = require('./routes/APIrouter')();
 
 app.use('/api', router);
 

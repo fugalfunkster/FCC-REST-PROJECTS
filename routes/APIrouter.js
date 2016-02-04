@@ -4,7 +4,7 @@ var routes = function() {
 
   var router = express.Router();
 
-  router.route('/:date')
+  router.route('/date/:date')
     .get(function(req, res){
       var returnObj = {};
       var dateIn = req.params.date;

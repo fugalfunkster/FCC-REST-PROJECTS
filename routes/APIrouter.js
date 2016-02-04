@@ -31,7 +31,7 @@ var routes = function() {
       var userSoftware = regEx.exec(req.get("User-Agent"))[0];
       resObj.software = userSoftware.slice(1, userSoftware.length - 1);
 
-      response.send(resObj);
+      res.send(resObj);
     });
   
     return router;

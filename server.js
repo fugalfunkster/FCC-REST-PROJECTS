@@ -1,5 +1,11 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.enable('trust proxy');
+
 
 var port = process.env.PORT || 8080;
 

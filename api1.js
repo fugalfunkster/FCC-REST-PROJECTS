@@ -6,7 +6,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.enable('trust proxy');
 
-app.get('/', function(request, response){
+app.get('/userinfo', function(request, response){
     var resObj = {};
     resObj.ipaddress = request.ip;
     resObj.language = request.get("Accept-Language").slice(0,5);

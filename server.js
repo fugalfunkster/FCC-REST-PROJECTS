@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var express = require('express');
 var app = express();
@@ -11,12 +11,6 @@ app.enable('trust proxy');
 var port = process.env.PORT || 8080;
 
 var router = require('./routes/APIrouter')();
-
-app.use(express.static('public'));
-
-app.get('/',function(req,res){
-      res.sendFile(__dirname + "/index.html");
-});
 
 app.use('/api', router);
 

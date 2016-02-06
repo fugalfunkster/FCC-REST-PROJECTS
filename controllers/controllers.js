@@ -1,4 +1,6 @@
 var express = require('express');
+var multer = require('multer');
+var upload = multer().single('the-file');
 
 var controllers = function() {
 
@@ -30,9 +32,19 @@ var controllers = function() {
       res.send(resObj);
     };
 
+  var uploadController = function(req,res){
+    upload(req,res,function(err) {
+        if(err) {
+            return res.end("Error uploading file.");
+        }
+        res.end("File size is " + req.file.size + "bytes.");
+    });
+  };
+
   return {
     dateController: dateController,
-    userInfoController: userInfoController
+    userInfoController: userInfoController,
+    uploadController: uploadController,
   };
 
 };

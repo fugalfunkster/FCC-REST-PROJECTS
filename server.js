@@ -12,11 +12,13 @@ var port = process.env.PORT || 8080;
 
 var router = require('./routes/APIrouter')();
 
-app.use('/api', router);
+app.use(express.static('public'));
 
-app.get('/', function(req, res) {
-  res.send("welcome to my api");
+app.get('/',function(req,res){
+      res.sendFile(__dirname + "/index.html");
 });
+
+app.use('/api', router);
 
 app.listen(8080, function(){
   console.log("listening on port 8080");

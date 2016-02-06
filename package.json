@@ -19,6 +19,8 @@
   "homepage": "https://github.com/fugalfunkster/FCC-REST-PROJECTS#readme",
   "dependencies": {
     "body-parser": "^1.14.2",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "multer": "^1.1.0",
+    "path": "^0.12.7"
   }
 }

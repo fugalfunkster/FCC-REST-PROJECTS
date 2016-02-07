@@ -14,6 +14,6 @@ var router = require('./routes/APIrouter')();
 
 app.use('/api', router);
 
-app.listen(8080, function(){
-  console.log("listening on port 8080");
+app.listen(port, function(){
+  console.log("listening on port " + port);
 });

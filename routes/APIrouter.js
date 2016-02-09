@@ -21,13 +21,11 @@ var routes = function() {
   router.route('/shorturl/:url')
     .get(controllers.shortUrlController);
 
-
   router.route('/search')
     .get(controllers.imageSearchController);
 
   router.route('/search/:query')
     .get(controllers.imageQueryController);
-
 
     return router;
 

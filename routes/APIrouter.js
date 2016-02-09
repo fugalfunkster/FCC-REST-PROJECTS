@@ -23,10 +23,10 @@ var routes = function() {
 
 
   router.route('/search')
-    .get(controllers.imageQueryController);
+    .get(controllers.imageSearchController);
 
   router.route('/search/:query')
-    .get(controllers.imageSearchController);
+    .get(controllers.imageQueryController);
 
 
     return router;

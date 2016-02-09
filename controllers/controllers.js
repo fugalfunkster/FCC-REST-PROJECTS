@@ -116,7 +116,7 @@ var controllers = function() {
 
   };
 
-  var imageQueryController =  function(req, res){
+  var imageSearchController =  function(req, res){
        
     mongo.connect('mongodb://localhost:27017/api', function (err, db) {
 
@@ -148,9 +148,9 @@ var controllers = function() {
     });
   };
 
-  var imageSearchController =  function(req, res){
+  var imageQueryController =  function(req, res){
 
-    mongo.connect('mongodb://localhost:27017/imagesearch', function (err, db) {
+    mongo.connect('mongodb://localhost:27017/api', function (err, db) {
 
       if(err){
         console.log("error connecting to DB");

@@ -1,6 +1,7 @@
 var express = require('express');
 var multer = require('multer');
 var upload = multer().single('the-file');
+var request = require('request');
 var mongo = require("mongodb").MongoClient;
 
 var controllers = function() {
@@ -115,11 +116,94 @@ var controllers = function() {
 
   };
 
+  var imageQueryController =  function(req, res){
+       
+    mongo.connect('mongodb://localhost:27017/api', function (err, db) {
+
+      if(err){
+        console.log("error connecting to DB");
+      } else{
+         console.log("DB running on 27017");
+      }
+
+      var searchDB = db.collection('searches');
+
+      var projection = {"query": 1, "when": 1, "_id" : 0};
+      var results = [];
+      searchDB.find({}, projection).sort([["when",1]]).limit(10).toArray(function(err, docArray){
+        if(err){
+          console.log(err);
+        }
+        
+        var results = [];
+        docArray.forEach(function(doc){
+          var timeStamp = new Date(doc.when);
+          doc.when = timeStamp.toString();
+          results.push(doc);
+        });
+       
+        res.send(results);
+      
+      });
+    });
+  };
+
+  var imageSearchController =  function(req, res){
+
+    mongo.connect('mongodb://localhost:27017/imagesearch', function (err, db) {
+
+      if(err){
+        console.log("error connecting to DB");
+      } else{
+        console.log("DB running on 27017");
+      }
+
+      var searchDB = db.collection('searches');
+
+      if(req.params.query === "favicon.ico"){
+        return;
+      }
+
+      var query = req.params.query;
+      var offset = parseInt(req.query.offset, 0);
+      var timeStamp = Date.now();
+
+      searchDB.insert({"query" : query, "when" : timeStamp}, function(err, doc){
+        if (err){
+          console.log("Error on DB Insert");
+        } else {
+          console.log("Sucessful DB Insert");
+        }
+      });
+
+      var queryUrl = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyBqj6TkeKTi9d5Ww7hnBsrhInD1VZ3Ejoc&cx=013362456140012184558:m1ujqvblmwo&searchType=image&q=' + query;
+
+      if(offset){
+        queryUrl = queryUrl + "&start=" + offset;
+      }
+
+      request(queryUrl, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          var json = JSON.parse(body);
+          var items  = [];
+          json.items.forEach(function(each){
+            items.push({"title": each.title, "snippet": each.snippet, "url" :each.link, "context": each.image.contextLink});
+          });
+          
+          res.send(items);
+          
+        }
+      });
+    });
+  };
+
   return {
     dateController: dateController,
     userInfoController: userInfoController,
     uploadController: uploadController,
     shortUrlController: shortUrlController,
+    imageQueryController: imageQueryController,
+    imageSearchController: imageSearchController
   };
 
 };

@@ -3,7 +3,7 @@
 I wrote these REST APIs as part of the FreeCodeCamp cirriculum.
 Originally, these APIs each had their own workspace on Cloud9,
 and their own git repo, but that seemed unnecessary, so I refactored
-them into a single workspace and provided extensive comments to help me
+them into a single workspace and added comments to help me
 remember what I learned – while these projects are still fresh in my mind.
 
 Eventually, I will provide an HTML doc at each '/' endpoint, describing

@@ -33,6 +33,7 @@ mongo.connect('mongodb://localhost:27017/imagesearch', function (err, db) {
 
     });
 
+
     app.get('/search/:query', function(req, res){
 
         if(req.params.query === "favicon.ico"){

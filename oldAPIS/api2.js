@@ -14,6 +14,7 @@ mongo.connect('mongodb://localhost:27017/shorturls', function (err, db) {
 
     var reRoutes = db.collection('routes');
 
+
     app.get(/^\/([^\\]+?)(?:\/(?=$))?$/, function (request, response) {
 
         var givenRoute = request.params[0];

@@ -104,7 +104,7 @@ var controllers = function() {
               if (err) {
                 throw new Error('makeNewRoute insert failed');
               } else {
-                var newRoute = {"originalurl": data.ops[0].originalurl, "shorturl": "https://url-short-fugalfunkster.c9users.io/"  + data.ops[0].shorturl};
+                var newRoute = {"originalurl": data.ops[0].originalurl, "shorturl": "https://fcc-apis-fugalfunkster.c9users.io/api/shorturl/"  + data.ops[0].shorturl};
                 res.send(newRoute);  
               }
             });

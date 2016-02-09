@@ -1,6 +1,7 @@
 var express = require('express');
 var multer = require('multer');
 var upload = multer().single('the-file');
+var mongo = require("mongodb").MongoClient;
 
 var controllers = function() {
 
@@ -22,7 +23,7 @@ var controllers = function() {
     };
 
   var userInfoController = function(req, res){
-      var resObj = {};
+      var resObj = {};n
       resObj.ipaddress = req.ip;
       resObj.language = req.get("Accept-Language").slice(0,5);
       var regEx = new RegExp(/\(.+?\)/);
@@ -41,10 +42,84 @@ var controllers = function() {
     });
   };
 
+  var shortUrlController = function (req, res) {
+
+    mongo.connect('mongodb://localhost:27017/api', function (err, db) {
+
+      if (err) {
+        throw new Error('Database failed to connect!');
+      } else {
+        console.log('MongoDB successfully connected on port 27017.');
+      }
+
+      var reRoutes = db.collection('shortURLs');
+
+      var givenRoute = req.params.url;
+
+      if (givenRoute === "favicon.ico"){
+        res.end();
+      } else {
+
+        var urlRegEx = new RegExp(/(^(https?):\/\/[a-z]+(\.).+\S)/);
+        var wwwRegEx = new RegExp(/(^[a-z]+(\.)[a-z,.]+\S)/);
+
+        if(urlRegEx.test(givenRoute)){
+          makeNewRoute();
+        } else if (wwwRegEx.test(givenRoute)){
+          givenRoute = "http://" + givenRoute;
+          makeNewRoute();
+        } else {
+          console.log(givenRoute);
+          doesRouteExist();
+        }
+      }
+
+      function doesRouteExist(){
+        var query = {"shorturl": parseInt(givenRoute)};
+        reRoutes.findOne(query, function(err, doc){
+          if (err) {
+            throw new Error('route lookup failed');
+          } else { 
+            console.log(query);
+            if (doc){
+              console.log(doc.originalurl);
+              res.redirect(doc.originalurl);
+            } else {
+              console.log(doc);
+              res.send("Not a valid URL");
+            }
+          }
+        });
+      }
+
+      function makeNewRoute(){
+        reRoutes.count({}, function(err, data){
+          if (err) {
+            throw new Error('route count failed');
+          } else {
+            console.log(data);
+            var count = data;
+            reRoutes.insert({"originalurl" : givenRoute, "shorturl" : count}, function(err, data) {
+              if (err) {
+                throw new Error('makeNewRoute insert failed');
+              } else {
+                var newRoute = {"originalurl": data.ops[0].originalurl, "shorturl": "https://url-short-fugalfunkster.c9users.io/"  + data.ops[0].shorturl};
+                res.send(newRoute);  
+              }
+            });
+          }
+        });
+      }
+
+    });
+
+  };
+
   return {
     dateController: dateController,
     userInfoController: userInfoController,
     uploadController: uploadController,
+    shortUrlController: shortUrlController,
   };
 
 };

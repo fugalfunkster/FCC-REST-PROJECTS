@@ -18,9 +18,11 @@ var routes = function() {
     })
     .post(controllers.uploadController);
 
+  router.route('/shorturl/:url')
+    .get(controllers.shortUrlController);
 
     return router;
 
-}
+};
 
 module.exports = routes;

@@ -23,8 +23,8 @@ var controllers = function() {
       res.send(returnObj);
     };
 
-  var userInfoController = function(req, res){
-      var resObj = {};n
+  var userInfoController = function(req, res) {
+      var resObj = {};
       resObj.ipaddress = req.ip;
       resObj.language = req.get("Accept-Language").slice(0,5);
       var regEx = new RegExp(/\(.+?\)/);
@@ -34,12 +34,12 @@ var controllers = function() {
       res.send(resObj);
     };
 
-  var uploadController = function(req,res){
+  var uploadController = function(req,res) {
     upload(req,res,function(err) {
         if(err) {
             return res.end("Error uploading file.");
         }
-        res.end("File size is " + req.file.size + "bytes.");
+        res.end("File size is " + req.file.size + " bytes.");
     });
   };
 
@@ -116,7 +116,7 @@ var controllers = function() {
 
   };
 
-  var imageSearchController =  function(req, res){
+  var imageSearchController =  function(req, res) {
        
     mongo.connect('mongodb://localhost:27017/api', function (err, db) {
 
@@ -148,7 +148,7 @@ var controllers = function() {
     });
   };
 
-  var imageQueryController =  function(req, res){
+  var imageQueryController =  function(req, res) {
 
     mongo.connect('mongodb://localhost:27017/api', function (err, db) {
 

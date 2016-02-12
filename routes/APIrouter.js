@@ -6,6 +6,11 @@ var routes = function() {
 
   var router = express.Router();
 
+  router.route('/')
+    .get(function(req, res) {
+      res.sendFile(path.join(__dirname, '../public', 'index.html'));
+    });
+
   router.route('/date/:date')
     .get(controllers.dateController);
 
@@ -14,7 +19,7 @@ var routes = function() {
   
   router.route('/upload')
     .get(function(req,res){
-      res.sendFile(path.join(__dirname, '../public', 'index.html'));
+      res.sendFile(path.join(__dirname, '../public', 'upload.html'));
     })
     .post(controllers.uploadController);
 

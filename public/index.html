@@ -1,10 +1,59 @@
-
 <!DOCTYPE html>
-<html>
+
+<head></head>
 <body>
-	<form id="file-form" enctype="multipart/form-data" action="/api/upload" method="POST">
-		<input type="file" name="the-file" />
-		<input type="submit" value="Upload" />
-	</form>
+  <h1>FreeCodeCamp's REST API Projects</h1>
+    <p>This API has five parts.</p>
+   
+    <ol>
+     
+      <li>
+        <h2>TimeStamp Microservice</h2>
+          <h3>Connect to the endpoint: "/api/date/"</h3>
+            <ul>
+              <li>This microservice accepts either a unix timestamp or a natural language date, and returns a JSON object containing both a unix timestamp and a natural language date.</li>
+              <li>Example: "/api/date/Janurary 1, 2016"</li>
+              <li>Example: "/api/date/1451635200000"</li>
+            </ul>
+      </li>
+
+      <li>
+        <h2>Request Header Parser Microservice</h2>
+          <h3>Connect to the endpoint: "/api/userinfo"</h3>
+            <ul>
+              <li>This microservice returns the client's IP address, language, and operating system from information about the client's browser.</li>
+            </ul>
+      </li>
+
+      <li>
+        <h2>URL Shortener Microservice</h2>
+          <h3>Connect to the endpoint: "/api/shorturl/"</h3>
+            <ul>
+              <li>This microservice accepts a valid url and returns a hyper-link that will redirect to the original url.</li>
+              <li>Example: "/api/shorturl/www.google.com</li>
+              <li>Example: "/api/shorturl/nytimes.com"</li>
+            </ul>
+      </li>
+
+      <li>
+        <h2>Image Search Abstraction Layer</h2>
+          <h3>Connect to the endpoint: "/api/search/"</h3>
+            <ul>
+              <li>This microservice accepts a search query string and returns alt text and page urls for a set of images relating to that query. The results are paginated, and can be traversed by ending the query with an offset. Ex: "?offset=2". </li>
+              <li>Example: "/api/search/lolcats"</li>
+              <li>Example: "/api/search/lolcats?offset=7"</li>
+              <li>Example: "/api/search"</li>
+            </ul>
+      </li>
+
+      <li>
+        <h2>File MetaData Microservice</h2>
+          <h3>Connect to the endpoint: "/api/upload"</h3>
+            <ul>
+              <li>This microservice accepts a file, selected via an html form, and returns the size of that file.</li>
+            </ul>
+        </li>
+
+    </ol>
+
 </body>
-</html>

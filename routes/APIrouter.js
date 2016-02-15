@@ -1,3 +1,6 @@
+/*jslint node: true */
+'use strict';
+
 var express = require('express');
 var controllers = require('../controllers/controllers.js')();
 var path = require('path');
@@ -16,9 +19,9 @@ var routes = function() {
 
   router.route('/userinfo')
     .get(controllers.userInfoController);
-  
+
   router.route('/upload')
-    .get(function(req,res){
+    .get(function(req, res) {
       res.sendFile(path.join(__dirname, '../public', 'upload.html'));
     })
     .post(controllers.uploadController);
@@ -32,7 +35,7 @@ var routes = function() {
   router.route('/search/:query')
     .get(controllers.imageQueryController);
 
-    return router;
+  return router;
 
 };
 
